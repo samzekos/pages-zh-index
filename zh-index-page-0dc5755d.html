@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中彩网 · 信息卡片介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        body {
+            background: #f4f9fc;
+            color: #1e2b3a;
+            line-height: 1.6;
+            padding: 1.5rem;
+        }
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉 (hero) */
+        .hero {
+            background: linear-gradient(145deg, #e0f0f5 0%, #c8e6e9 100%);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0, 60, 80, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text {
+            flex: 1 1 280px;
+        }
+        .hero-text h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #004d5a;
+            margin-bottom: 0.75rem;
+        }
+        .hero-text p {
+            font-size: 1.05rem;
+            color: #1d4e5a;
+            max-width: 520px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: #007786;
+            color: white;
+            font-weight: 500;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+        }
+        .hero-visual {
+            flex: 0 0 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #2fc1cc, #008a99);
+            border-radius: 50%;
+            opacity: 0.2;
+            display: none; 
+        }
+        @media (min-width: 500px) {
+            .hero-visual {
+                display: block;
+                flex: 0 0 120px;
+                height: 120px;
+                opacity: 0.25;
+            }
+        }
+
+        /* 网格卡片 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        @media (min-width: 600px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 900px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.6rem 1.4rem;
+            box-shadow: 0 2px 12px rgba(0, 40, 50, 0.04);
+            border: 1px solid #d9e9ed;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(0, 100, 110, 0.08);
+        }
+        .card .icon {
+            display: inline-block;
+            background: #cde3e9;
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #005f6b;
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #003d47;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: #2d4d57;
+        }
+        .card .tag {
+            display: inline-block;
+            background: #e2f0f2;
+            color: #006672;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+        }
+
+        /* 适合人群 + 自然链接段落 */
+        .section-people {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #d4e4e8;
+        }
+        .section-people h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #00444f;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.3px;
+        }
+        .people-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+        .people-item {
+            background: #ebf4f7;
+            padding: 0.3rem 1.2rem 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #004d5a;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .people-item::before {
+            content: "·";
+            font-weight: 700;
+            color: #008a99;
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+        .link-paragraph {
+            background: #f0f8fa;
+            padding: 1.4rem 1.6rem;
+            border-radius: 1.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #1e444f;
+            border-left: 4px solid #2db2c0;
+        }
+        .link-paragraph a {
+            color: #006c7a;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1.5px solid #8cc9d4;
+            transition: border-color 0.15s;
+        }
+        .link-paragraph a:hover {
+            border-bottom-color: #005f6b;
+        }
+
+        /* 提示 / FAQ 摘要 */
+        .note-faq {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .note-faq .box {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.4rem 1.4rem;
+            flex: 1 1 240px;
+            border: 1px solid #d3e4e9;
+        }
+        .note-faq h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #00444f;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .note-faq h4::before {
+            content: "▹";
+            color: #2ba6b5;
+            font-size: 1.2rem;
+        }
+        .note-faq p {
+            font-size: 0.9rem;
+            color: #2f555f;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            color: #406873;
+            font-size: 0.8rem;
+            padding: 1.8rem 0 0.5rem;
+            border-top: 1px solid #cfe0e5;
+            margin-top: 0.5rem;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.8rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 主视觉 -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>一眼识别 · 中彩网</h1>
+            <p>聚合信息、工具与社区动态，帮你快速判断这个网站是否对你有用。没有推销，只有清晰的功能介绍。</p>
+            <span class="hero-badge">信息卡片式 · 简洁直达</span>
+        </div>
+        <div class="hero-visual"></div>
+    </div>
+
+    <!-- 用途卡片（网格） -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="icon">📋</div>
+            <h3>快速读懂用途</h3>
+            <p>网站围绕「信息查询与参考」展开，你可以在这里找到分类数据、常见问题解读和动态资讯。</p>
+            <span class="tag">信息聚合</span>
+        </div>
+        <div class="card">
+            <div class="icon">🧩</div>
+            <h3>场景适配</h3>
+            <p>日常浏览、资料对比、趋势观察——不同需求都能找到对应的内容模块，界面直观。</p>
+            <span class="tag">多场景</span>
+        </div>
+        <div class="card">
+            <div class="icon">📌</div>
+            <h3>内容结构</h3>
+            <p>以分类栏目 + 列表页为主，重要更新会置顶展示，减少信息噪音，聚焦关键。</p>
+            <span class="tag">清晰层级</span>
+        </div>
+    </div>
+
+    <!-- 适合人群 + 自然链接段落 -->
+    <div class="section-people">
+        <h2>哪些人适合使用？</h2>
+        <div class="people-list">
+            <span class="people-item">希望快速了解网站定位的访客</span>
+            <span class="people-item">经常查阅分类信息与动态的用户</span>
+            <span class="people-item">对数据趋势感兴趣的内容浏览者</span>
+            <span class="people-item">寻找可靠参考信息的学习者</span>
+        </div>
+        <div class="link-paragraph">
+            <p>如果你已经对网站方向有了基本印象，可以直接前往 <a href="https://zh-index-zhcw.com">中彩网</a> 浏览具体栏目。站内信息按主题组织，你可以根据导航快速定位自己需要的部分，节省筛选时间。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 + 提示 -->
+    <div class="note-faq">
+        <div class="box">
+            <h4>常见疑问摘要</h4>
+            <p>网站是否收费？<br>—— 基础信息浏览与查阅均免费，部分功能可能需要注册，以页面提示为准。</p>
+            <p style="margin-top:0.7rem;">信息更新频率？<br>—— 内容按栏目定期维护，重要变动会以公告形式展示。</p>
+        </div>
+        <div class="box">
+            <h4>使用提示</h4>
+            <p>建议从首页导航栏开始探索，分类标题清晰。若需要对比不同时段的信息，可以使用站内筛选或排序功能（视具体栏目而定）。</p>
+        </div>
+        <div class="box">
+            <h4>快速判断</h4>
+            <p>如果你只是偶尔查阅某个分类，可以记住栏目名称，下次直接通过站内搜索抵达。无需注册也能浏览大部分内容。</p>
+        </div>
+    </div>
+
+    <!-- 辅助说明（非硬广） -->
+    <div style="background:#e5f1f4; border-radius:1.5rem; padding:1.2rem 1.6rem; margin:1.2rem 0 0.8rem; font-size:0.95rem; color:#1d505b; border:1px solid #c1d9df;">
+        <span style="display:inline-block; background:#008894; color:white; border-radius:30px; padding:0.1rem 0.8rem; font-size:0.75rem; margin-right:0.6rem;">信息参考</span>
+        本站内容仅供个人参考，不构成任何形式建议。请根据自身判断合理使用，保持理性。
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <span>介绍页 · 内容仅供了解用途 · 无诱导表述</span>
+    </div>
+
+</div>
+</body>
+</html>
